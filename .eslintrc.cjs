@@ -40,12 +40,13 @@ module.exports = {
     quotes: [
       'error',
       'single',
+      'double',
       {
         avoidEscape: true,
         allowTemplateLiterals: true,
       },
     ],
-    semi: ['error', 'always'],
+    // semi: ['error', 'always'],
     'no-console': ['off'],
     'no-constant-condition': ['warn'],
     curly: ['error', 'all'],
