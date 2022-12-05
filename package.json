@@ -1,7 +1,7 @@
 {
-  "name": "advent-of-code-boilerplate",
+  "name": "advent-of-code-2022",
   "version": "1.0.0",
-  "description": "Boilerplate workspace for advent of code puzzle",
+  "description": "Advent of code 2022 template",
   "main": "index.ts",
   "scripts": {
     "dev": "nodemon",

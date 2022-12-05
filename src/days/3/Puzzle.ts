@@ -2,7 +2,7 @@ import Puzzle from "../../types/AbstractPuzzle"
 
 export default class ConcretePuzzle extends Puzzle {
     private getItemValue(item: string): number {
-        let value = item.charCodeAt(0)
+        const value = item.charCodeAt(0)
         // subtract 96 for lowercase letters
         // subtract 38 for uppercase letters
         return value - (65 <= value && value <= 90 ? 38 : 96)
