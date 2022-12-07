@@ -1,0 +1,42 @@
+[
+    {
+        "name": "/",
+        "path": "/",
+        "files": [
+            { "name": "b.txt", "size": 14848514 },
+            { "name": "c.dat", "size": 8504156 }
+        ],
+        "dirSize": 48381165,
+        "directories": ["/a/", "/d/", "/a/e/"]
+    },
+    {
+        "name": "a",
+        "path": "/a/",
+        "files": [
+            { "name": "f", "size": 29116 },
+            { "name": "g", "size": 2557 },
+            { "name": "h.lst", "size": 62596 }
+        ],
+        "dirSize": 94853,
+        "directories": ["/a/e/"]
+    },
+    {
+        "name": "d",
+        "path": "/d/",
+        "files": [
+            { "name": "j", "size": 4060174 },
+            { "name": "d.log", "size": 8033020 },
+            { "name": "d.ext", "size": 5626152 },
+            { "name": "k", "size": 7214296 }
+        ],
+        "dirSize": 24933642,
+        "directories": []
+    },
+    {
+        "name": "e",
+        "path": "/a/e/",
+        "files": [{ "name": "i", "size": 584 }],
+        "dirSize": 584,
+        "directories": []
+    }
+]
