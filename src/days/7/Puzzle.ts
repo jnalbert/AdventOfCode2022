@@ -1,18 +1,5 @@
 import Puzzle from '../../types/AbstractPuzzle';
 
-interface Directory {
-    name: string;
-    path: string;
-    files: File[];
-    directories: string[];
-    dirSize: number;
-}
-
-interface File {
-    name: string;
-    size: number;
-}
-
 export default class ConcretePuzzle extends Puzzle {
 
     private getInputAsArray(): string[] {
@@ -30,18 +17,8 @@ export default class ConcretePuzzle extends Puzzle {
 
   public solveFirst(): string {
     const commands = this.getInputAsArray();
-    let currentPath = "/"
-    const directories: Directory[] = [];
-
-    // base directory
-    const baseDirectory: Directory = {
-        name: "/",
-        path: "/",
-        files: [],
-        dirSize: 0,
-        directories: [],
-    }
-    directories.push(baseDirectory);
+    let currentPath = ["/"]
+    const directories = {"/": 0 }
 
     for (let i = 0; i < commands.length; i++) {
         const command = commands[i]
@@ -52,89 +29,73 @@ export default class ConcretePuzzle extends Puzzle {
                 const path = commandParts[2];
                 if (path === "..") {
                     // go back one directory
-                    currentPath = currentPath.split("/").slice(0, -2).join("/") || "/";
+                    currentPath.length > 1 && currentPath.pop();
                 } else if (path === "/") {
-                    currentPath = "/";
+                    currentPath = ["/"];
                 } else {
-                    currentPath = `${currentPath}${path}/`;
+                    currentPath.push(`${path}/`);
                 }
-                // console.log(path, currentPath)
+                // console.log(currentPath, command)
                 
             }
         } else {
-            // its a directory
-            // if (command.includes("dir")) {
-            //     const commandParts = command.split(" ");
-            //     const dirName = commandParts[1];
+            // its a file
+            if (!(command.substring(0, 3) === "dir")) {
                 
-            //     const directory: Directory = {
-            //         name: dirName,
-            //         path: `${currentPath}${dirName}/`,
-            //         files: [],
-            //         dirSize: 0,
-            //         directories: [],
-            //     }
+                let directoryTotal = 0;
+                // console.log(command)
 
-            //     !directories.find(d => d.path === `${currentPath}/${dirName}`) && directories.push(directory);
-
-            //     const parentDirectories = this.getAllParentWithPath(currentPath)
-            //     parentDirectories.forEach((dName) => {
-            //         const parentDirectory = directories.find(d => d.path === `${dName}`);
-            //         parentDirectory && parentDirectory.directories.push(directory.path);
-            //     })
-
-            // } else {
-                if (!command.includes("dir")) {
-                    const directory: Directory = {
-                        name: currentPath.split("/").slice(-2)[0],
-                        path: `${currentPath}`,
-                        files: [],
-                        dirSize: 0,
-                        directories: [],
-                    }
-                    !directories.find(d => d.path === `${currentPath}`) && directories.push(directory);
-
-                // its a file
                 const commandParts = command.split(" ");
                 const fileSize = Number(commandParts[0]);
-                console.log(fileSize, "First")
-                // const fileName = commandParts[1]
 
-                // const file: File = {
-                //     name: fileName,
-                //     size: fileSize,
-                // }
-
-                // const currentDirectory = directories.find(d => d.path === currentPath);
+                console.log(fileSize, currentPath)
+            
+                // const currentDirectory = directories.find(d => d.path === currentPath.join(""));
                 // if (currentDirectory) {
-                //     currentDirectory.files.push(file);
+                //     directory = currentDirectory;
+                // } else {
+                //     directories.push(directory);
                 // }
 
+                // let j = i
+                // while (commands[j] && !commands[j].includes("$") ) {
+                //     // console.log(commands[j], currentPath)
+                //     if (!(commands[j].substring(0, 3) === "dir")) {
+                //         // console.log(commands[j], currentPath)
+                //         const commandParts = commands[j].split(" ");
+                //         const fileSize = Number(commandParts[0]);
+                //         directoryTotal += fileSize;
+                //     }
+                //     j++
+                // }
+                // // sub one to account for over for loop increment
+                // i = j - 1
+                // // console.log(directory)
+                // // add the current value of this directory up the chain to all of the parent directories
+                // const parentDirectories = this.getAllParentWithPath(currentPath.join(""))
+                // parentDirectories.forEach((dName) => {
+                //     console.log(dName)
+                //     const parentDirectory = directories.find(d => d.path === `${dName}`);
+                //     parentDirectory && (parentDirectory.dirSize += directoryTotal);
+                // })
+                // const currentDirect = directories.find(d => d.path === currentPath.join(""));
+                // if (currentDirect) {
+                //     currentDirect.dirSize += directoryTotal;
+                // } else {
+                //     directories.push(directory);
+                // }
                
-                // add the current value of this directory up the chain to all of the parent directories
-                const parentDirectories = this.getAllParentWithPath(currentPath)
-                // console.log(parentDirectories, "Second")
-                parentDirectories.forEach((dName) => {
-                    console.log(dName, "Third")
-                    const parentDirectory = directories.find(d => d.path === `${dName}`);
-                    parentDirectory && (parentDirectory.dirSize += fileSize);
-                })
             }
-                
         }
     }
 
-    // // find the size of each directory 
-    // directories.forEach(d => {
-    //     d.dirSize = this.findValueOfDirectory(directories, d);
-    // })
-
-    // console.log(JSON.stringify(directories))
+    console.log(JSON.stringify(directories))
 
     // find the directories <= 100000 and add them
-    const lowerDirectories = directories.filter(d => d.dirSize <= 100000);
-    // return all of the directories added together
-    return lowerDirectories.reduce((acc, curr) => acc + curr.dirSize, 0).toString();
+    // const lowerDirectories = directories.filter(d => d.dirSize <= 100000);
+    // // return all of the directories added together
+    // return lowerDirectories.reduce((acc, curr) => acc + curr.dirSize, 0).toString();
+    return ""
   }
 
   public getFirstExpectedResult(): string {
