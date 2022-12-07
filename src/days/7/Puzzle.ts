@@ -18,7 +18,7 @@ export default class ConcretePuzzle extends Puzzle {
   public solveFirst(): string {
     const commands = this.getInputAsArray();
     let currentPath = ["/"]
-    const directories = {"/": 0 }
+    const directories: { [key: string]: number } = {"/": 0 }
 
     for (let i = 0; i < commands.length; i++) {
         const command = commands[i]
@@ -35,72 +35,31 @@ export default class ConcretePuzzle extends Puzzle {
                 } else {
                     currentPath.push(`${path}/`);
                 }
-                // console.log(currentPath, command)
-                
             }
         } else {
             // its a file
             if (!(command.substring(0, 3) === "dir")) {
-                
-                let directoryTotal = 0;
-                // console.log(command)
-
                 const commandParts = command.split(" ");
                 const fileSize = Number(commandParts[0]);
 
-                console.log(fileSize, currentPath)
+                const parentDirectories = this.getAllParentWithPath(currentPath.join(""))
+                console.log(parentDirectories)
+                parentDirectories.forEach((dName) => {
+                    directories[dName] = directories[dName] ? directories[dName] + fileSize : fileSize;
+                })
             
-                // const currentDirectory = directories.find(d => d.path === currentPath.join(""));
-                // if (currentDirectory) {
-                //     directory = currentDirectory;
-                // } else {
-                //     directories.push(directory);
-                // }
-
-                // let j = i
-                // while (commands[j] && !commands[j].includes("$") ) {
-                //     // console.log(commands[j], currentPath)
-                //     if (!(commands[j].substring(0, 3) === "dir")) {
-                //         // console.log(commands[j], currentPath)
-                //         const commandParts = commands[j].split(" ");
-                //         const fileSize = Number(commandParts[0]);
-                //         directoryTotal += fileSize;
-                //     }
-                //     j++
-                // }
-                // // sub one to account for over for loop increment
-                // i = j - 1
-                // // console.log(directory)
-                // // add the current value of this directory up the chain to all of the parent directories
-                // const parentDirectories = this.getAllParentWithPath(currentPath.join(""))
-                // parentDirectories.forEach((dName) => {
-                //     console.log(dName)
-                //     const parentDirectory = directories.find(d => d.path === `${dName}`);
-                //     parentDirectory && (parentDirectory.dirSize += directoryTotal);
-                // })
-                // const currentDirect = directories.find(d => d.path === currentPath.join(""));
-                // if (currentDirect) {
-                //     currentDirect.dirSize += directoryTotal;
-                // } else {
-                //     directories.push(directory);
-                // }
-               
             }
         }
     }
-
     console.log(JSON.stringify(directories))
-
-    // find the directories <= 100000 and add them
-    // const lowerDirectories = directories.filter(d => d.dirSize <= 100000);
-    // // return all of the directories added together
-    // return lowerDirectories.reduce((acc, curr) => acc + curr.dirSize, 0).toString();
-    return ""
+    // filter the object for only the values that are less than 10000
+    const lowerDirectories = Object.keys(directories).filter(d => directories[d] <= 100000);
+    return lowerDirectories.reduce((acc, curr) => acc + directories[curr], 0).toString();
   }
 
   public getFirstExpectedResult(): string {
     // RETURN EXPECTED SOLUTION FOR TEST 1;
-    return 'day 1 solution 1';
+    return '1845346';
   }
 
   public solveSecond(): string {
