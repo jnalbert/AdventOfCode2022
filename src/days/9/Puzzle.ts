@@ -91,17 +91,14 @@ export default class ConcretePuzzle extends Puzzle {
                         Math.abs(rope[j][1] - rope[j - 1][1]) > 1
                     ) {
                         if (rope[j][0] !== rope[j - 1][0]) {
-                            (rope[j][0] > rope[j - 1][0]) ? rope[j][0]++ : rope[j][0]--
+                            (rope[j - 1][0] > rope[j][0]) ? rope[j][0]++ : rope[j][0]--
                         }
                         if (rope[j][1] !== rope[j - 1][1]) {
-                            (rope[j][1] > rope[j - 1][1]) ? rope[j][1]++ : rope[j][1]--
+                            (rope[j - 1][1] > rope[j][1]) ? rope[j][1]++ : rope[j][1]--
                         }
                     }
                     
                 }
-
-                // console.log(positionTail.join(","), "adding")
-                // get the last index of the rope
 
                 visitedPoints.add(rope[rope.length - 1].join(","));
             }
@@ -112,6 +109,6 @@ export default class ConcretePuzzle extends Puzzle {
 
     public getSecondExpectedResult(): string {
         // RETURN EXPECTED SOLUTION FOR TEST 2;
-        return "day 1 solution 2"
+        return "2467"
     }
 }
