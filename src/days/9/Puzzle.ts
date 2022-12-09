@@ -52,13 +52,9 @@ export default class ConcretePuzzle extends Puzzle {
                             : positionTail[1]--
                     }
                 }
-                // console.log(direction, positionHead, positionTail)
-
-                // console.log(positionTail.join(","), "adding")
                 visited.add(positionTail.join(","))
             }
         }
-        // console.log(visited)
         return (visited.size - 2).toString()
     }
 
@@ -112,7 +108,6 @@ export default class ConcretePuzzle extends Puzzle {
                 visitedPoints.add(rope[rope.length - 1].join(","))
             }
         }
-        // console.log(visited)
         return (visitedPoints.size - 2).toString()
     }
 
