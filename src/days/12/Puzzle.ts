@@ -36,20 +36,20 @@ export default class ConcretePuzzle extends Puzzle {
     
   public solveFirst(): string {
     const {start, end, elevMap} = this.paseMap();
-    let visitedStops = List
+    // let visitedStops = List
 
     // find the shortest path between S and E while only moving to a space that is one higher than the current position
     // if there is no path, return -1
-    for (let i = 0; i < floorMap.length; i++) {
-        for (let j = 0; j < floorMap[i].length; j++) {
-            if (floorMap[i][j] === 'S') {
-                // start = [i, j];
-            }
-            if (floorMap[i][j] === 'E') {
-                // end = [i, j];
-            }
-        }
-    }
+    // for (let i = 0; i < floorMap.length; i++) {
+    //     for (let j = 0; j < floorMap[i].length; j++) {
+    //         if (floorMap[i][j] === 'S') {
+    //             // start = [i, j];
+    //         }
+    //         if (floorMap[i][j] === 'E') {
+    //             // end = [i, j];
+    //         }
+    //     }
+    // }
 
     return 'day 1 solution 1';
   }
